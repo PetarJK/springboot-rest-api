@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.petarjk.springboot.restapi.dao.UserRepository;
 import com.petarjk.springboot.restapi.entity.User;
+import com.petarjk.springboot.restapi.rest.UserNotFoundException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		if (result.isPresent()) {
 			theUser = result.get();
 		} else {
-			throw new RuntimeException("User with id - " + theId + " not found.");
+			throw new UserNotFoundException("User id not found - " + theId);
 		}
 
 		return theUser;
