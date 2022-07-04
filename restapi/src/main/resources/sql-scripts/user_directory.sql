@@ -40,16 +40,16 @@ INSERT INTO `user` VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` char(68) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `users` 
 VALUES 
-('Arina','{noop}pass123',1),
-('Kristina','{noop}pass123',1),
-('Petar','{noop}pass123',1);
+('Arina','{bcrypt}$2a$10$W8Xy7AnNvyNG1U6g2XvX/emTc2FWXL59U8vp7XCQ8eIHb3odjCLaS',1),
+('Kristina','{bcrypt}$2a$10$W8Xy7AnNvyNG1U6g2XvX/emTc2FWXL59U8vp7XCQ8eIHb3odjCLaS',1),
+('Petar','{bcrypt}$2a$10$W8Xy7AnNvyNG1U6g2XvX/emTc2FWXL59U8vp7XCQ8eIHb3odjCLaS',1);
 
 DROP TABLE IF EXISTS `authorities`;
 CREATE TABLE `authorities` (
