@@ -23,6 +23,8 @@ import com.petarjk.springboot.restapi.service.UserService;
 @RequestMapping("/api")
 public class UserRestController {
 
+	private final String DELETE_USER_MESSAGE = "Deleted user with id - ";
+
 	private UserService userService;
 
 	@Autowired
@@ -41,9 +43,9 @@ public class UserRestController {
 	@GetMapping("/users/{userId}")
 	public User findById(@PathVariable int userId) {
 
-		User theUser = userService.findById(userId);
+		User user = userService.findById(userId);
 
-		return theUser;
+		return user;
 	}
 
 	@GetMapping("/users/search")
@@ -53,35 +55,29 @@ public class UserRestController {
 	}
 
 	@PostMapping("/users")
-	public User save(@RequestBody User theUser) {
+	public User save(@RequestBody User user) {
 
-		theUser.setId(0);
+		user.setId(0);
 
-		userService.save(theUser);
+		userService.save(user);
 
-		return theUser;
+		return user;
 	}
 
 	@PutMapping("/users")
-	public User updateUser(@RequestBody User theUser) {
+	public User updateUser(@RequestBody User user) {
 
-		userService.save(theUser);
+		userService.save(user);
 
-		return theUser;
+		return user;
 	}
 
 	@DeleteMapping("/users/{userId}")
 	public String deleteUser(@PathVariable int userId) {
 
-		User tempuser = userService.findById(userId);
-
-		if (tempuser == null) {
-			throw new IllegalArgumentException();
-		}
-
 		userService.deleteById(userId);
 
-		return "Deleted user with id - " + userId;
+		return DELETE_USER_MESSAGE + userId;
 	}
 
 }

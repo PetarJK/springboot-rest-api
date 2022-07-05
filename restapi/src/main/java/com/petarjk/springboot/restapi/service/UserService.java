@@ -11,11 +11,11 @@ public interface UserService {
 
 	public Page<User> listAllByPage(Pageable pageable);
 
-	public User findById(int theId);
+	public User findById(int userId);
 
-	public void save(User theUser);
+	public void save(User user);
 
-	public void deleteById(int theId);
+	public void deleteById(int userId);
 
 	public List<User> search(String query);
 

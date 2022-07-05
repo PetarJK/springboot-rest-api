@@ -15,6 +15,8 @@ import com.petarjk.springboot.restapi.rest.UserNotFoundException;
 @Service
 public class UserServiceImpl implements UserService {
 
+	private final String USER_ID_NOT_FOUND_MESSAGE = "User id not found - ";
+
 	private UserRepository userRepository;
 
 	@Autowired
@@ -28,31 +30,37 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findById(int theId) {
+	public User findById(int userId) {
 
-		Optional<User> result = userRepository.findById(theId);
+		Optional<User> result = userRepository.findById(userId);
 
-		User theUser = null;
+		User user = null;
 
 		if (result.isPresent()) {
-			theUser = result.get();
+			user = result.get();
 		} else {
-			throw new UserNotFoundException("User id not found - " + theId);
+			throw new UserNotFoundException(USER_ID_NOT_FOUND_MESSAGE + userId);
 		}
 
-		return theUser;
+		return user;
 	}
 
 	@Override
-	public void save(User theUser) {
+	public void save(User user) {
 
-		userRepository.save(theUser);
+		userRepository.save(user);
 	}
 
 	@Override
-	public void deleteById(int theId) {
+	public void deleteById(int userId) {
 
-		userRepository.deleteById(theId);
+		Optional<User> result = userRepository.findById(userId);
+
+		if (result.isEmpty()) {
+			throw new UserNotFoundException(USER_ID_NOT_FOUND_MESSAGE + userId);
+		}
+
+		userRepository.deleteById(userId);
 	}
 
 	@Override
