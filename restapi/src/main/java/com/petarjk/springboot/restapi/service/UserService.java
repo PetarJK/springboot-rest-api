@@ -5,18 +5,20 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.petarjk.springboot.restapi.entity.User;
+import com.petarjk.springboot.restapi.dto.UserDTO;
 
 public interface UserService {
 
-	public Page<User> listAllByPage(Pageable pageable);
+	public Page<UserDTO> listAllByPage(Pageable pageable);
 
-	public User findById(int userId);
+	public UserDTO findById(int userId);
 
-	public void save(User user);
+	public List<UserDTO> search(String query);
+
+	public void save(UserDTO userDTO);
+
+	public void update(UserDTO userDTO);
 
 	public void deleteById(int userId);
-
-	public List<User> search(String query);
 
 }

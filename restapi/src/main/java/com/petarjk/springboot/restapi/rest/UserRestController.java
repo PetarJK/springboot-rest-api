@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.petarjk.springboot.restapi.entity.User;
+import com.petarjk.springboot.restapi.dto.UserDTO;
 import com.petarjk.springboot.restapi.service.UserService;
 
 @RestController
@@ -33,43 +33,41 @@ public class UserRestController {
 	}
 
 	@GetMapping("/users")
-	public Page<User> findPaginated(Pageable pageable) {
+	public Page<UserDTO> findPaginated(Pageable pageable) {
 
-		Page<User> users = userService.listAllByPage(pageable);
+		Page<UserDTO> userDTOS = userService.listAllByPage(pageable);
 
-		return users;
+		return userDTOS;
 	}
 
 	@GetMapping("/users/{userId}")
-	public User findById(@PathVariable int userId) {
+	public UserDTO findById(@PathVariable int userId) {
 
-		User user = userService.findById(userId);
+		UserDTO userDTO = userService.findById(userId);
 
-		return user;
+		return userDTO;
 	}
 
 	@GetMapping("/users/search")
-	public ResponseEntity<List<User>> search(@RequestParam("query") String query) {
+	public ResponseEntity<List<UserDTO>> search(@RequestParam("query") String query) {
 
 		return ResponseEntity.ok(userService.search(query));
 	}
 
 	@PostMapping("/users")
-	public User save(@RequestBody User user) {
+	public UserDTO save(@RequestBody UserDTO userDTO) {
 
-		user.setId(0);
+		userService.save(userDTO);
 
-		userService.save(user);
-
-		return user;
+		return userDTO;
 	}
 
 	@PutMapping("/users")
-	public User updateUser(@RequestBody User user) {
+	public UserDTO updateUser(@RequestBody UserDTO userDTO) {
 
-		userService.save(user);
+		userService.update(userDTO);
 
-		return user;
+		return userDTO;
 	}
 
 	@DeleteMapping("/users/{userId}")
