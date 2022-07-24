@@ -2,9 +2,12 @@ package com.petarjk.springboot.restapi.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,11 +58,11 @@ public class UserRestController {
 	}
 
 	@PostMapping("/users")
-	public UserDTO save(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<String> save(@Valid @RequestBody UserDTO userDTO) {
 
 		userService.save(userDTO);
 
-		return userDTO;
+		return new ResponseEntity<String>("User created", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/users")
