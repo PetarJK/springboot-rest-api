@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,19 +57,19 @@ public class UserRestController {
 	}
 
 	@PostMapping("/users")
-	public ResponseEntity<String> save(@Valid @RequestBody UserDTO userDTO) {
+	public UserDTO save(@Valid @RequestBody UserDTO userDTO) {
 
-		userService.save(userDTO);
+		UserDTO savedUserDTO = userService.save(userDTO);
 
-		return new ResponseEntity<String>("User created", HttpStatus.CREATED);
+		return savedUserDTO;
 	}
 
 	@PutMapping("/users")
-	public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+	public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO) {
 
-		userService.update(userDTO);
+		UserDTO updatedUserDTO = userService.update(userDTO);
 
-		return userDTO;
+		return updatedUserDTO;
 	}
 
 	@DeleteMapping("/users/{userId}")

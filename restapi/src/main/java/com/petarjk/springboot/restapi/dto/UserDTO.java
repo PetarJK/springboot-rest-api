@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import com.petarjk.springboot.restapi.entity.User;
@@ -18,6 +19,7 @@ public class UserDTO {
 	@NotBlank(message = "Last name is required")
 	private String lastName;
 
+	@NotNull(message = "Date of birth is required")
 	@Past(message = "A valid date of birth is required")
 	private LocalDate dateOfBirth;
 
