@@ -2,6 +2,8 @@ package com.petarjk.springboot.restapi.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,19 +57,19 @@ public class UserRestController {
 	}
 
 	@PostMapping("/users")
-	public UserDTO save(@RequestBody UserDTO userDTO) {
+	public UserDTO save(@Valid @RequestBody UserDTO userDTO) {
 
-		userService.save(userDTO);
+		UserDTO savedUserDTO = userService.save(userDTO);
 
-		return userDTO;
+		return savedUserDTO;
 	}
 
 	@PutMapping("/users")
-	public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+	public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO) {
 
-		userService.update(userDTO);
+		UserDTO updatedUserDTO = userService.update(userDTO);
 
-		return userDTO;
+		return updatedUserDTO;
 	}
 
 	@DeleteMapping("/users/{userId}")

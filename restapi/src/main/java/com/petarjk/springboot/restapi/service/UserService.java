@@ -15,9 +15,9 @@ public interface UserService {
 
 	public List<UserDTO> search(String query);
 
-	public void save(UserDTO userDTO);
+	public UserDTO save(UserDTO userDTO);
 
-	public void update(UserDTO userDTO);
+	public UserDTO update(UserDTO userDTO);
 
 	public void deleteById(int userId);
 

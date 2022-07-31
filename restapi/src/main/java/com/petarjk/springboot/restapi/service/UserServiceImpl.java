@@ -59,16 +59,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void save(UserDTO userDTO) {
+	public UserDTO save(UserDTO userDTO) {
 
 		User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getDateOfBirth(),
 				userDTO.getPhoneNumber(), userDTO.getEmail());
 
 		userRepository.save(user);
+
+		return new UserDTO(user);
+
 	}
 
 	@Override
-	public void update(UserDTO userDTO) {
+	public UserDTO update(UserDTO userDTO) {
 
 		User user = new User(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getDateOfBirth(),
 				userDTO.getPhoneNumber(), userDTO.getEmail());
@@ -76,6 +79,8 @@ public class UserServiceImpl implements UserService {
 		user.setId(userDTO.getId());
 
 		userRepository.save(user);
+
+		return new UserDTO(user);
 
 	}
 

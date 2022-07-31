@@ -20,7 +20,7 @@ public class UserRestExceptionHandler {
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<UserErrorResponse> handleException(Exception exc) {
+	public ResponseEntity<UserErrorResponse> handleRuntimeException(RuntimeException exc) {
 
 		UserErrorResponse error = new UserErrorResponse(HttpStatus.BAD_REQUEST.value(), BAD_REQUEST_EXCEPTION_MESSAGE,
 				System.currentTimeMillis());
